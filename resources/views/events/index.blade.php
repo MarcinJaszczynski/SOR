@@ -1,14 +1,8 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
-    <div class="justify-content-center">
-        @if (\Session::has('success'))
-        <div class="alert alert-success">
-            <p>{{ \Session::get('success') }}</p>
-        </div>
-        @endif
-        <div class="card">
-            <div class="card-header">
+
+        <div class="container top__bar">
+            <div class="events__menu">
                 <h4>Imprezy</h4> |
                 <a href="?eventStatus=Potwierdzona">Potwierdzona</a> |
                 <a href="?eventStatus=OdprawaOK">OdprawaOK</a> |
@@ -20,9 +14,10 @@
                 <a href="?eventStatus=Archiwum">Archiwum</a> |
                 <a href="?createTime=True">Najnowsze</a> | |
 
-                <a href="?">Reset</a> |
-
-
+                <a href="?">Reset</a>
+            </div>
+            <div class="event__search__bar">
+                <div class="events_search">
 
                 <form action='events'>
                     <input type="hidden" name="search" value="search">
@@ -41,14 +36,18 @@
 
                     <input type="submit" value="Szukaj">
                 </form>
+                </div>
+
 
                 @can('role-create')
-                <span class="float-right d-flex justify-content-end">
+                <div>
                     <a class="btn btn-primary" href="{{ route('events.create') }}">Nowa impreza</a>
-                </span>
+                </div>
                 @endcan
             </div>
-            <div class="card-body">
+        </div>
+
+            <div class="container">
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>

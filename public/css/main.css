@@ -1,0 +1,14 @@
+nav {
+    margin-bottom: 20px;
+}
+
+.top__bar {
+    margin-bottom: 20px;
+}
+
+.event__search__bar {
+    margin: 20 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -1,4 +1,6 @@
 @extends('layouts.app')
+
+
 @section('content')
 
 <!-- ///////////////////////////// StartContractModal ////////////////////////////////////////// -->
@@ -579,6 +581,7 @@
                                         <select name="eventStatus" id="eventStatus" class="form-select">
                                             <option value="{{ $event->eventStatus }}">{{ $event->eventStatus }}</option>
                                             <option value="Planowana">Planowana</option>
+                                            <option value="Oferta">Oferta</option>
                                             <option value="Potwierdzona">Potwierdzona</option>
                                             <option value="OdprawaOK">OdprawaOK</option>
                                             <option value="DoRozliczenia">DoRozliczenia</option>
@@ -1180,187 +1183,7 @@
 </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('js\summernote-bs4.js') }}"></script>
+<script src="{{ asset('js\editevent.js') }}"></script>
 
-
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $("#editEventNote").summernote();
-        $('.dropdown-toggle').dropdown();
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        $('.elementCreateBtn').on('click', function() {
-            $('#createEventElementModal').modal('show');
-        })
-    })
-</script>
-<script>
-    $(document).ready(function() {
-        $('#btnAddHotel').on('click', function() {
-            $('#createHotelModal').modal('show');
-        })
-    })
-</script>
-
-<script>
-    $(document).ready(function() {
-        $('#contractButton').on('click', function() {
-            $('#contractModal').modal('show');
-        })
-    })
-</script>
-
-
-
-<script>
-    const addHotelShow = () => {
-        let showAddHotelBtn = document.getElementById('btnAddEventHotel')
-        let addHotelModal = document.getElementById('addEventHotelModal')
-        console.log(showAddHotelBtn)
-        console.log(addHotelModal)
-
-        showAddHotelBtn.addEventListener("click", function() {
-            $('#addEventHotelModal').modal('show')
-        })
-    }
-
-
-    addHotelShow()
-
-
-
-    // $(document).ready(function() {
-    //     $('#btnAddEventHotel').on('click', function() {
-    //         $('#addEventHotelModal').modal('show');
-    //     })
-    // })
-</script>
-
-
-<!-- /////////////// Start - Obługa edycji hotelu w rezerwacji ///////////////////////////////// -->
-<script>
-    $(document).ready(function() {
-        $('.eventHotelEditBtn').on('click', function() {
-            $('#eventHotelEditModal').modal('show');
-
-            $tr = $(this).closest('tr');
-
-            var eventHotelData = $tr.children("td").map(function() {
-                return $(this).text();
-            }).get();
-
-            var eStartTime = new Date(eventHotelData[1]);
-            var localHotelTime = eStartTime.getTimezoneOffset() / 60
-            eStartTime.setHours(eStartTime.getHours() - localHotelTime);
-
-            eStartTime = eStartTime.toISOString().slice(0, -1);
-            console.log(eStartTime);
-            var a = document.getElementById(
-                "eHotelStart").defaultValue = eStartTime;
-
-
-            var eEndTime = new Date(eventHotelData[2]);
-            eEndTime.setHours(eEndTime.getHours() - localHotelTime);
-
-            eEndTime = eEndTime.toISOString().slice(0, -1);
-            console.log(eventHotelData);
-            var b = document.getElementById(
-                "eHotelEnd").defaultValue = eEndTime;
-
-            // $('#eHotelEnd').val(eventHotelData[2]);
-
-            $('#eHotelRooms').val(eventHotelData[7]);
-
-            $('#eHotelNote').val(eventHotelData[8]);
-
-            $('#eHotelId').val(eventHotelData[0]);
-
-            document.getElementById('eHotelName') = eventHotelData[3].innerText;
-
-
-
-
-        })
-    })
-</script>
-
-
-
-
-
-
-<!-- /////////////// Koniec - Obługa edycji hotelu w rezerwacji ///////////////////////////////// -->
-
-
-
-
-<script>
-    $(document).ready(function() {
-
-        $('.editbtn').on('click', function() {
-
-            $('#eventElementEditModal').modal('show');
-
-            $tr = $(this).closest('tr');
-
-            var data = $tr.children("td").map(function() {
-                return $(this).text();
-            }).get();
-
-
-            // var data = $tr.children("td").map(function () {
-            //     return $(this).text();
-            // }).get();
-
-
-            $('#elementId').val(data[0]);
-            // $('#elementStart').val(data[1]);
-            var startTime = new Date(data[1]);
-            var localTime = startTime.getTimezoneOffset() / 60
-            startTime.setHours(startTime.getHours() - localTime);
-            console.log(startTime);
-            startTime = startTime.toISOString().slice(0, -1);
-
-
-            var c = document.getElementById(
-                "elementStart").defaultValue = startTime;
-
-
-
-            var endTime = new Date(data[2]);
-            endTime.setHours(endTime.getHours() - localTime);
-
-            endTime = endTime.toISOString().slice(0, -1);
-
-            var d = document.getElementById(
-                "elementEnd").defaultValue = endTime;
-
-            // $('#elementEnd').val(data[2]);
-
-            $('#elementName').val(data[3]);
-            $('#elementDescription').val(data[4]);
-            $('#elementContact').val(data[5]);
-            $('#elementReservation').val(data[6]);
-            $('#elementNote').val(data[7]);
-
-            $('#elementHotelPrint').val(data[8]);
-            document.getElementById("elementHotelPrint").innerHTML = data[8];
-
-            $('#elementPilotPrint').val(data[9]);
-            document.getElementById("elementPilotPrint").innerHTML = data[9];
-
-
-
-        });
-    });
-</script>
-
-<!-- <script>
-
-</script> -->
 @endsection

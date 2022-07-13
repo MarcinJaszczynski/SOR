@@ -51,12 +51,9 @@
 
                                             <select name="eventStatus" id="eventStatus" class="form-select">
                                             <option value="Planowana">Planowana</option>
+                                            <option value="Oferta">Oferta</option>
                                                 <option value="Potwierdzona">Potwierdzona</option>
-                                                <option value="Zakończona">Zakończona</option>
-                                                <option value="Zmiana terminu">Zmiana terminu</option>
-                                                <option value="Anulowana">Anulowana</option>
-                                                <option value="Archiwum">Archiwum</option>
-                                            </select>
+                                                 </select>
                                         </div>
 <hr>
 
