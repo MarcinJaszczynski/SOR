@@ -33,9 +33,8 @@ Route::get('/', function () {
     return view('layouts.app');
 });
 
-Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', UserController::class);
@@ -44,6 +43,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('events', EventController::class);
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+})->middleware('auth');
+
+
 Route::post('filedelete', [EventController::class, 'fileDelete'])->name('filedelete');
 
 Route::put('eventfileupdate', [EventController::class, 'eventFileUpdate'])->name('eventfileupdate');
@@ -51,8 +55,6 @@ Route::put('eventfileupdate', [EventController::class, 'eventFileUpdate'])->name
 Route::delete('/elementDelete/{id}', [EventController::class, 'elementDelete']);
 
 Route::post('/events/fileStore', [EventController::class, 'fileStore'])->name('events.fileStore');
-
-// Route::get('download-zip', [EventController::class, 'downloadZip']);
 
 Route::post('eventhotel/store', [EventController::class, 'eventHotelStore']);
 
@@ -77,7 +79,6 @@ Route::get('/reports/driverPdf', [PDFController::class, 'generateDriverpdf'])->n
 Route::get('/reports/briefcasePdf', [PDFController::class, 'generateBriefcasepdf'])->name('briefcasepdf');
 
 Route::post('/reports/contractPdf', [PDFController::class, 'generateContractpdf'])->name('contractpdf');
-
 
 
 

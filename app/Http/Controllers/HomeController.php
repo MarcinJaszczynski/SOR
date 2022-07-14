@@ -25,9 +25,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        $data = Event::latest()->paginate(100);
-
-        return view('events.index',compact('data'));
+        return view('dashboard.index');
         // return view('events.index');
     }
 }

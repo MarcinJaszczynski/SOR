@@ -33,7 +33,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container d-flex justify-content-between">
                 <div class="mr-auto p-2">
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/dashboard/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
