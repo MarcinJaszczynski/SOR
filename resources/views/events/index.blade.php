@@ -57,7 +57,6 @@
                             <th>Hotel</th>
                             <th>Pilot/Kierowca</th>
                             <th>Status</th>
-
                             <th>Operacje</th>
                         </tr>
                     </thead>
