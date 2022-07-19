@@ -50,7 +50,7 @@
                                         <strong>Status imprezy:</strong>
 
                                             <select name="eventStatus" id="eventStatus" class="form-select">
-                                            <option value="Planowana">Planowana</option>
+                                            <option value="Zapytanie">Zapytanie</option>
                                             <option value="Oferta">Oferta</option>
                                                 <option value="Potwierdzona">Potwierdzona</option>
                                                  </select>

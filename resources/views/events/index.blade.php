@@ -48,6 +48,7 @@
         </div>
 
             <div class="container">
+                <div class="table-responsive">
                 <table class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
@@ -132,6 +133,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
                 {{ $data->links() }}
             </div>
         </div>

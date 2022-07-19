@@ -12,3 +12,7 @@ nav {
     justify-content: space-between;
     align-items: center;
 }
+
+.table__text__bold {
+    font-weight: 600;
+}

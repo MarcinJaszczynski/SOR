@@ -544,417 +544,537 @@
                
             </div>
         </div>
-</div>
-<div class="container">
 
-        {!! Form::model($event, ['route' => ['events.update', $event->id], 'method'=>'PATCH', 'files' => true ]) !!}
+        <div>
 
-            <div class="row">
-                <div class="col-md-12 col-lg-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Podstawowe dane imprezy</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                <div class="form-group">
-                                    <strong>Nazwa:</strong>
-                                    {!! Form::text('eventName', null, array('placeholder' => 'Nazwa','class' => 'form-control')) !!}
-                                </div>
-                                <div class="form-group">
-                                    <strong>Kod imprezy:</strong>
-                                    {!! Form::text('eventOfficeId', null, array('placeholder' => 'Kod imprezy','class' => 'form-control')) !!}
-                                </div>
-                                <div class="form-group">
-                                    <strong>Status imprezy: {{ $event->eventStatus }}</strong>
+            <h1>Debug</h1>
 
-                                    <select name="eventStatus" id="eventStatus" class="form-select">
-                                        <option value="{{ $event->eventStatus }}">{{ $event->eventStatus }}</option>
-                                        <option value="Zapytanie">Zapytanie</option>
-                                        <option value="Oferta">Oferta</option>
-                                        <option value="Potwierdzona">Potwierdzona</option>
-                                        <option value="OdprawaOK">OdprawaOK</option>
-                                        <option value="DoRozliczenia">DoRozliczenia</option>
-                                        <option value="Zakończona">Zakończona</option>
-                                        <option value="Zmiana terminu">Zmiana terminu</option>
-                                        <option value="Anulowana">Anulowana</option>
-                                        <option value="Archiwum">Archiwum</option>
+            <div>{{ $event->id }}</div>
 
-                                    </select>
-                                </div>
-                            </div>
-                            <hr>
+        </div>
 
-                            <div class="row">
-                                <div class="col-md-12 col-lg-6">
-                                    <div class="card">
-                                        <div class="card-header">Kierowcy/Piloci</div>
-                                            <div class="card-body">
-                                                <div class="card-text">
-                                                    <div class="form-group">
-                                                        {{ Form::label('eventDriver', 'Kierowcy: imię/nazwisko nr telefonu', array('class' => 'awesome')) }}
-                                                        {!! Form::textarea('eventDriver', null, ['rows' => 2, 'class'=>'form-control']) !!}
 
-                                                        {{ Form::label('eventPilot', 'Piloci: imię/nazwisko nr telefonu', array('class' => 'awesome')) }}
-                                                        {!! Form::textarea('eventPilot', null, ['rows' => 2, 'class'=>'form-control']) !!}
-                                                        <!-- <strong>Imie i nazwisko:</strong>
 
-                                                        {!! Form::text('eventDriverName', null, array('placeholder' => 'imię i nazwisko:','class' => 'form-control')) !!} -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12 col-lg-6">
-                                        <div class="card">
-                                            <div class="card-header">Koszty:</div>
-                                            <div class="card-body">
-                                                <div class="card-text">
-                                                    <div><strong>Łącznie: </strong>{{ $event->totalSum($event->id) }}</div>
-                                                    <div><strong>Zapłacono: </strong> {{ $event->paidSum($event->id) }}</div>
-                                                    <hr>
 
-                                                    <div><strong>Wydatki pilota: </strong>{{ $event->pilotSum($event->id) }}</div>
 
-                                                    <div class="form-group">
-                                                        <strong>Zaliczka dla pilota:</strong>
-                                                        {!! Form::text('eventAdvancePayment', null, array('placeholder' => '0','class' => 'form-control')) !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Notatki biurowe</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                <div class="form-group">
-                                    <textarea id="editEventNote" name="eventNote" rows="6" class="form-control">
-                                    {!! $event->eventNote !!}
-                                    </textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Notatki dla pilota</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                <div class="form-group">
-                                    <textarea name="eventPilotNotes" rows="6" class="form-control">
-                                    {!! $event->eventPilotNotes !!}
-                                    </textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>                       
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-md-12 col-lg-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4> Dane zamawiającego:</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                <div class="form-group">
-                                    <strong>Nazwa firmy/szkoły:</strong>
-                                    {!! Form::text('eventPurchaserName', null, array('placeholder' => 'Nazwa','class' => 'form-control')) !!}
-                                </div>
-                                <div class="form-group">
-                                    <strong>Ulica/nr posesji:</strong>
-                                    {!! Form::text('eventPurchaserStreet', null, array('placeholder' => 'Ulica','class' => 'form-control')) !!}
-                                </div>
-                                <div class="form-group">
-                                    <strong>Miejscowośś:</strong>
-                                    {!! Form::text('eventPurchaserCity', null, array('placeholder' => 'miejscowość','class' => 'form-control')) !!}
-                                </div>
-                                <div class="form-group">
-                                    <strong>NIP:</strong>
-                                    {!! Form::text('eventPurchaserNip', null, array('placeholder' => 'Nip','class' => 'form-control')) !!}
-                                </div>
-                                <div class="form-group">
-                                    <strong>Osoba kontaktowa:</strong>
-                                    {!! Form::text('eventPurchaserContactPerson', null, array('placeholder' => 'Imię i nazwisko','class' => 'form-control')) !!}
-                                </div>
-                                <div class="form-group">
-                                    <strong>telefon kontaktowy:</strong>
-                                    {!! Form::text('eventPurchaserTel', null, array('placeholder' => '0000','class' => 'form-control')) !!}
-                                </div>
-                                <div class="form-group">
-                                    <strong>email:</strong>
-                                    {!! Form::email('eventPurchaserEmail', null, array('placeholder' => 'email@test.pl','class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-12 col-lg-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Uczestnicy</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                <div class="form-group">
-                                    <strong>Łączna ilość uczestników:</strong>
-                                    {!! Form::text('eventTotalQty', null, array('placeholder' => 'Uczestnicy','class' => 'form-control')) !!}
-                                </div>
 
-                                <div class="form-group">
-                                    <strong>Ilość opiekunów:</strong>
-                                    {!! Form::text('eventGuardiansQty', null, array('placeholder' => 'opiekunowie','class' => 'form-control')) !!}
-                                </div>
 
-                                <div class="form-group">
-                                    <strong>Ilość uczestników w gratisie:</strong>
-                                    {!! Form::text('eventFreeQty', null, array('placeholder' => 'gratisy','class' => 'form-control')) !!}
-                                </div>
 
-                                <div class="form-group">
-                                    <strong>Dieta:</strong>
-                                    {!! Form::textarea('eventDietAlert', null, array('placeholder' => 'Uwagi odnośnie diety','class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Start</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-text">
-                                <strong>Godzina wyjazdu</strong>
-                                <div class="form-group">
-                                    {{ Form::input('dateTime-local', 'eventStartDateTime', date('Y-m-d\TH:i',  strtotime($event->eventStartDateTime)) , ['id' => 'eventStartTime', 'class' => 'form-control']) }}
-                                </div>
-                                <hr>
-                                <strong>Godzina podstawienia</strong>
-                                <div class="form-group">
-                                    {{ Form::input('dateTime-local', 'busBoardTime', date('Y-m-d\TH:i',  strtotime($event->busBoardTime)) , [ 'id'=>'busBoardTime', 'class' => 'form-control']) }}
-                                    <strong>Adres podstawienia, uwagi itp.:</strong>
-                                </div>
-                                {!! Form::textarea('eventStartDescription', null, array('placeholder' => 'Uwagi do podstawienia','class' => 'form-control')) !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="card-body">
+                {!! Form::model($event, ['route' => ['events.update', $event->id], 'method'=>'PATCH', 'files' => true ]) !!}
 
-                <div class="col-md-12 col-lg-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Koniec:</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <strong>Godzina powrotu</strong>
-                                {{ Form::input('dateTime-local', 'eventEndDateTime',  date('Y-m-d\TH:i',  strtotime($event->eventEndDateTime)), ['id' => 'eventEndTime', 'class' => 'form-control']) }}
-                            </div>
-                            <strong>Informacje o wycieczce:</strong>
-                            <div class="card-text">
-                                {!! Form::textarea('eventEndDescription', null, array('placeholder' => 'Uwagi do powrotu','class' => 'form-control')) !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
+
+
                 <div class="row">
-                <button type="submit" class="btn btn-primary "><i class="bi bi-hdd"></i> Zapisz </button>
-                {!! Form::close() !!}
-                </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Podstawowe dane imprezy</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <div class="form-group">
+                                        <strong>Nazwa:</strong>
+                                        {!! Form::text('eventName', null, array('placeholder' => 'Nazwa','class' => 'form-control')) !!}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <strong>Kod imprezy:</strong>
+                                        {!! Form::text('eventOfficeId', null, array('placeholder' => 'Kod imprezy','class' => 'form-control')) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        <strong>Status imprezy: {{ $event->eventStatus }}</strong>
+
+                                        <select name="eventStatus" id="eventStatus" class="form-select">
+                                            <option value="{{ $event->eventStatus }}">{{ $event->eventStatus }}</option>
+                                            <option value="Zapytanie">Zapytanie</option>
+                                            <option value="Oferta">Oferta</option>
+                                            <option value="Potwierdzona">Potwierdzona</option>
+                                            <option value="OdprawaOK">OdprawaOK</option>
+                                            <option value="DoRozliczenia">DoRozliczenia</option>
+                                            <option value="Zakończona">Zakończona</option>
+                                            <option value="Zmiana terminu">Zmiana terminu</option>
+                                            <option value="Anulowana">Anulowana</option>
+                                            <option value="Archiwum">Archiwum</option>
+
+                                        </select>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-header">Kierowcy/Piloci</div>
+                                                <div class="card-body">
+                                                    <div class="card-text">
+                                                        <div class="form-group">
+                                                            {{ Form::label('eventDriver', 'Kierowcy: imię/nazwisko nr telefonu', array('class' => 'awesome')) }}
+                                                            {!! Form::textarea('eventDriver', null, ['rows' => 2, 'class'=>'form-control']) !!}
+
+                                                            {{ Form::label('eventPilot', 'Piloci: imię/nazwisko nr telefonu', array('class' => 'awesome')) }}
+                                                            {!! Form::textarea('eventPilot', null, ['rows' => 2, 'class'=>'form-control']) !!}
+                                                            <!-- <strong>Imie i nazwisko:</strong>
+
+                                                            {!! Form::text('eventDriverName', null, array('placeholder' => 'imię i nazwisko:','class' => 'form-control')) !!} -->
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-header">Koszty:</div>
+                                                <div class="card-body">
+                                                    <div class="card-text">
+                                                        <div><strong>Łącznie: </strong>{{ $event->totalSum($event->id) }}</div>
+                                                        <div><strong>Zapłacono: </strong> {{ $event->paidSum($event->id) }}</div>
+                                                        <hr>
+
+                                                        <div><strong>Wydatki pilota: </strong>{{ $event->pilotSum($event->id) }}</div>
+
+                                                        <div class="form-group">
+                                                            <strong>Zaliczka dla pilota:</strong>
+                                                            {!! Form::text('eventAdvancePayment', null, array('placeholder' => '0','class' => 'form-control')) !!}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Notatki biurowe</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <div class="form-group">
+                                        <textarea id="editEventNote" name="eventNote" rows="6" class="form-control">
+                                        {!! $event->eventNote !!}
+                                        </textarea>
+
+
+                                        <!-- {!! Form::textarea('eventNote', $event->eventNote, array('placeholder' => 'Notatki','class' => 'form-control', 'id'=>'editEventNote')) !!} -->
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Notatki dla pilota</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <div class="form-group">
+                                        <textarea name="eventPilotNotes" rows="6" class="form-control">
+                                        {!! $event->eventPilotNotes !!}
+                                        </textarea>
+
+
+                                        <!-- {!! Form::textarea('eventNote', $event->eventNote, array('placeholder' => 'Notatki','class' => 'form-control', 'id'=>'editEventNote')) !!} -->
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
                 </div>
             </div>
-        <hr>
-</div>
 
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4> Dane zamawiającego:</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <div class="form-group">
+                                        <strong>Nazwa firmy/szkoły:</strong>
+                                        {!! Form::text('eventPurchaserName', null, array('placeholder' => 'Nazwa','class' => 'form-control')) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        <strong>Ulica/nr posesji:</strong>
+                                        {!! Form::text('eventPurchaserStreet', null, array('placeholder' => 'Ulica','class' => 'form-control')) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        <strong>Miejscowośś:</strong>
+                                        {!! Form::text('eventPurchaserCity', null, array('placeholder' => 'miejscowość','class' => 'form-control')) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        <strong>NIP:</strong>
+                                        {!! Form::text('eventPurchaserNip', null, array('placeholder' => 'Nip','class' => 'form-control')) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        <strong>Osoba kontaktowa:</strong>
+                                        {!! Form::text('eventPurchaserContactPerson', null, array('placeholder' => 'Imię i nazwisko','class' => 'form-control')) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        <strong>telefon kontaktowy:</strong>
+                                        {!! Form::text('eventPurchaserTel', null, array('placeholder' => '0000','class' => 'form-control')) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        <strong>email:</strong>
+                                        {!! Form::email('eventPurchaserEmail', null, array('placeholder' => 'email@test.pl','class' => 'form-control')) !!}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Uczestnicy</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-text">
+
+                                    <div class="form-group">
+                                        <strong>Łączna ilość uczestników:</strong>
+                                        {!! Form::text('eventTotalQty', null, array('placeholder' => 'Uczestnicy','class' => 'form-control')) !!}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <strong>Ilość opiekunów:</strong>
+                                        {!! Form::text('eventGuardiansQty', null, array('placeholder' => 'opiekunowie','class' => 'form-control')) !!}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <strong>Ilość uczestników w gratisie:</strong>
+                                        {!! Form::text('eventFreeQty', null, array('placeholder' => 'gratisy','class' => 'form-control')) !!}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <strong>Dieta:</strong>
+                                        {!! Form::textarea('eventDietAlert', null, array('placeholder' => 'Uwagi odnośnie diety','class' => 'form-control')) !!}
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Start</h4>
+                            </div>
+
+
+
+                            <div class="card-body">
+
+                                <div class="card-text">
+                                    <strong>Godzina wyjazdu</strong>
+
+
+                                    <div class="form-group">
+                                        {{ Form::input('dateTime-local', 'eventStartDateTime', date('Y-m-d\TH:i',  strtotime($event->eventStartDateTime)) , ['id' => 'eventStartTime', 'class' => 'form-control']) }}
+                                    </div>
+                                    <hr>
+
+                                    <strong>Godzina podstawienia</strong>
+
+
+                                    <div class="form-group">
+                                        {{ Form::input('dateTime-local', 'busBoardTime', date('Y-m-d\TH:i',  strtotime($event->busBoardTime)) , [ 'id'=>'busBoardTime', 'class' => 'form-control']) }}
+                                        <strong>Adres podstawienia, uwagi itp.:</strong>
+
+
+                                    </div>
+                                    {!! Form::textarea('eventStartDescription', null, array('placeholder' => 'Uwagi do podstawienia','class' => 'form-control')) !!}
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Koniec:</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <strong>Godzina powrotu</strong>
+
+                                    {{ Form::input('dateTime-local', 'eventEndDateTime',  date('Y-m-d\TH:i',  strtotime($event->eventEndDateTime)), ['id' => 'eventEndTime', 'class' => 'form-control']) }}
+
+                                </div>
+                                <strong>Informacje o wycieczce:</strong>
+
+                                <div class="card-text">
+                                    {!! Form::textarea('eventEndDescription', null, array('placeholder' => 'Uwagi do powrotu','class' => 'form-control')) !!}
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+            <button type="submit" class="btn btn-primary "><i class="bi bi-hdd"></i> Zapisz</button>
+            {!! Form::close() !!}
+        </div>
+    </div>
+
+    <hr>
 
     <!--Start moduł hotelowy i obsługa-->
 
-    <div class="container">
-        <div class="row justify-content-between">
-                <div class="row justify-content-between">
-                    <div class="col-md-6">
-                        <h4>Noclegi</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="btn-group float-end" role="group" aria-label="button-add-hotel">
-                            <button type="button" class="btn btn-outline-primary " id="btnAddHotel"><i class="bi bi-file-earmark-plus"></i> nowy hotel</button>
-                            <button type="button" class="btn btn-outline-success " id="btnAddEventHotel"><i class="bi bi-calendar-plus"></i> Dodaj hotel do imprezy</button>
+    <div class="row justify-content-between">
+        <!-- Start moduł hotel -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row justify-content-between">
+                        <div class="col-md-6">
+                            <h4>Noclegi</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="btn-group float-end" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-outline-primary " id="btnAddHotel"><i class="bi bi-file-earmark-plus"></i> nowy hotel</button>
+                                <button type="button" class="btn btn-outline-success " id="btnAddEventHotel"><i class="bi bi-calendar-plus"></i> Dodaj hotel do imprezy</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row justify-content-between">
-                <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead>
-                        <th class="d-none">HotelId</th>
-                        <th>Początek</th>
-                        <th>Koniec</th>
-                        <th>Hotel</th>
-                        <th>Ulica</th>
-                        <th>Miejscowość</th>
-                        <th>Region</th>
-                        <th>Struktura<br>pokojów</th>
-                        <th>Notatki</th>
-                        <th>Operacje</th>
-                    </thead>
-                        @foreach($event->hotels->sortBy('eventHotelStartDate') as $hotel)
-                        <tr>
-                            <td class="d-none">{{ $hotel->id }} </td>
-                            <td>{{ $hotel->pivot->eventHotelStartDate }}</td>
-                            <td>{{ $hotel->pivot->eventHotelEndDate }}</td>
-                            <td> {{ $hotel->hotelName }} </td>
-                            <td> {{ $hotel->hotelStreet }} </td>
-                            <td> {{ $hotel->hotelCity }} </td>
-                            <td> {{ $hotel->hotelRegion }} </td>
-                            <td>
-                                <span class="word-wrap"> {{ $hotel->pivot->eventHotelRooms }}</span>
-                            </td>
-                            <td class="tabletextformated"> {{ $hotel->pivot->eventHotelNote }} </td>
-                            <td>
-                                <div class="btn-group float-end" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-outline-success eventHotelEditBtn">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </button>
-                                    <form action="/eventHotelDelete" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <input type="hidden" name="event_Id" value="{{ $event->id }}">
-                                        <input type="hidden" name="hotel_Id" value="{{ $hotel->id }}">
-                                        <button class="btn btn-outline-danger"><i class="bi bi-trash3"></i></button>
-                                    </form>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </table>
+                <div class="card-body">
+                    <div class="card-text">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <th class="d-none">HotelId</th>
+                                <th>Początek</th>
+                                <th>Koniec</th>
+                                <th>Nazwa</th>
+                                <th>Ulica</th>
+                                <th>Miejscowość</th>
+                                <th>Region</th>
+                                <th>Struktura<br>pokojów</th>
+                                <th>Notatki</th>
+                                <th>Operacje</th>
+                            </thead>
+
+
+
+                            @foreach($event->hotels->sortBy('eventHotelStartDate') as $hotel)
+                            <tr>
+                                <td class="d-none">{{ $hotel->id }} </td>
+                                <td>{{ $hotel->pivot->eventHotelStartDate }}</td>
+                                <td>{{ $hotel->pivot->eventHotelEndDate }}</td>
+                                <td> {{ $hotel->hotelName }} </td>
+                                <td> {{ $hotel->hotelStreet }} </td>
+                                <td> {{ $hotel->hotelCity }} </td>
+                                <td> {{ $hotel->hotelRegion }} </td>
+                                <td>
+                                    <pre>{{ $hotel->pivot->eventHotelRooms }}</pre>
+                                </td>
+                                <td class="tabletextformated"> {{ $hotel->pivot->eventHotelNote }} </td>
+                                <td>
+                                    <div class="btn-group float-end" role="group" aria-label="Basic example">
+                                        <button type="button" class="btn btn-outline-success eventHotelEditBtn">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </button>
+                                        <form action="/eventHotelDelete" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <input type="hidden" name="event_Id" value="{{ $event->id }}">
+                                            <input type="hidden" name="hotel_Id" value="{{ $hotel->id }}">
+                                            <button class="btn btn-outline-danger"><i class="bi bi-trash3"></i></button>
+                                        </form>
+                                    </div>
+
+                            </tr>
+                            @endforeach
+
+
+
+                        </table>
+                    </div>
                 </div>
-                </div>
-                
-                <hr>
+
             </div>
+        </div>
+        <!-- Koniec moduł hotel -->
+        <!-- Start moduł obsługa -->
+        <div class="col-md-6"></div>
+        <!-- Koniec moduł hotel -->
+
+    </div>
+
+
+    <!-- koniec moduł hotel i obsługa -->
+    <hr>
 
     <!-- moduł program imprezy -->
 
-<div class="container">
-    <div class="row justify-content-between">
-        <div class="col">
-            <h1>Program imprezy</h1>
+    <div class="card">
+        <div class="card-header">
+            <div class="row justify-content-between">
+                <div class="col-4">
+                    <h4>Program imprezy</h4>
+                </div>
+                <div class="col-4 text-right">
+                    <button type="button" class="btn btn-outline-primary float-end elementCreateBtn" id="elementCreateBtn"><i class="bi bi-plus"></i>
+                        Nowy punkt programu</button>
+
+                </div>
+            </div>
+
+
+
         </div>
-        <div class="col text-right">
-            <button type="button" class="btn btn-outline-primary float-end elementCreateBtn" id="elementCreateBtn"><i class="bi bi-plus"></i>Nowy punkt programu</button>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row justify-content-between">
-        <div class="table-responsive">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th class="d-none">idn_to_utf8</th>
-                    <th>Start</th>
-                    <th>Koniec</th>
-                    <th>Nazwa</th>
-                    <th>Opis</th>
-                    <th>Kontakt/miejsce</th>
-                    <th>Rezerwacje/ustalenia</th>
-                    <th>Notatki</th>
-                    <th>druk<br>hotel</th>
-                    <th>druk<br>pilot</th>
-                    <th>operacje</th>
-                </tr>
-            </thead>
+        <div class="card-body">
+            <div class="card-text">
+                <table class="table table-striped table-hover" width="100%">
+                    <thead>
+                        <tr>
+                            <th class="d-none">idn_to_utf8</th>
+                            <th>Start</th>
+                            <th>Koniec</th>
+                            <th>Nazwa</th>
+                            <th>Opis</th>
+                            <th>Kontakt/miejsce</th>
+                            <th>Rezerwacje/ustalenia</th>
+                            <th>Notatki</th>
+                            <th>druk<br>hotel</th>
+                            <th>druk<br>pilot</th>
+                            <th>operacje</th>
+                        </tr>
+
+                    </thead>
 
                     <!-- START - dodanie dnia wycieczki -->
 
-            @php
-            $first_datetime = new DateTime($event->eventStartDateTime);
-            $f_datetime = $first_datetime->format("d");
-            $timeInterval = 1;
-            echo '<tr>
-                <td class="tdbordered" colspan="11">
-                    <h3><strong>DZIEŃ '.$timeInterval.'</strong></h3>
-                </td>
-            </tr>';
-            @endphp
-            <!-- KONIEC - dodanie dnia wycieczki -->
-            @foreach($event->eventElements->sortBy('eventElementStart') as $element)
-
-            <!-- START - dodanie dnia wycieczki -->
+                    @php
+                    $first_datetime = new DateTime($event->eventStartDateTime);
+                    $f_datetime = $first_datetime->format("d");
+                    $timeInterval = 1;
+                    echo '<tr>
+                        <td class="tdbordered" colspan="11">
+                            <h3><strong>DZIEŃ '.$timeInterval.'</strong></h3>
+                        </td>
+                    </tr>';
+                    @endphp
 
 
-            @php
-            $last_datetime = new DateTime($element->eventElementStart);
-            $l_datetime = $last_datetime->format("d");
-            if ($f_datetime != $l_datetime) {
-                $timeInterval++;
-                $f_datetime = $l_datetime;
-                echo '<tr><td class="tdbordered" colspan="11"><h3><strong>DZIEŃ ' . $timeInterval . '</strong></h3></td></tr>';
-            }
-            @endphp
+                    <!-- KONIEC - dodanie dnia wycieczki -->
+                    @foreach($event->eventElements->sortBy('eventElementStart') as $element)
 
-            <!-- KONIEC - dodanie dnia wycieczki -->
-
-            <tr>
-                <td class="d-none">{{ $element->id }} </td>
-                <td>{{ $element->eventElementStart }}</td>
-                <td>{{ $element->eventElementEnd }}</td>
-                <td>{!! $element->element_name !!}</td>
-                <td class="text-wrap">{{ $element->eventElementDescription }}</td>
-                <td class="text-wrap">{{ $element->eventElementContact }}</td>
-                <td class="text-wrap">{{ $element->eventElementReservation }}</td>
-                <td class="text-wrap">{{ $element->eventElementNote }}</td>
-                <td>{{ $element->eventElementHotelPrint }}</td>
-                <td>{{ $element->eventElementPilotPrint }}</td>
+                    <!-- START - dodanie dnia wycieczki -->
 
 
-                <td>
-                    <div class="btn-group float-end" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-outline-success editbtn">
-                            <i class="bi bi-pencil-square"></i>
-                        </button>
-                        <form action="/elementDelete/{{ $element->id }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-outline-danger"><i class="bi bi-trash3"></i></button>
-                        </form>
-                </td>
-            </tr>
-            @endforeach
-        </table>
-    </div>
+                    <?php
+                    $last_datetime = new DateTime($element->eventElementStart);
+                    $l_datetime = $last_datetime->format("d");
+                    if ($f_datetime != $l_datetime) {
+                        $timeInterval++;
+                        $f_datetime = $l_datetime;
+                        echo '<tr><td class="tdbordered" colspan="11"><h3><strong>DZIEŃ ' . $timeInterval . '</strong></h3></td></tr>';
+                    }
+
+                    ?>
+
+                    <!-- KONIEC - dodanie dnia wycieczki -->
+
+                    <tr>
+                        <td class="d-none">{{ $element->id }} </td>
+                        <td>{{ $element->eventElementStart }}</td>
+                        <td>{{ $element->eventElementEnd }}</td>
+                        <td>{!! $element->element_name !!}</td>
+                        <td class="tabletextformated">{{ $element->eventElementDescription }}</td>
+                        <td class="tabletextformated">{{ $element->eventElementContact }}</td>
+                        <td class="tabletextformated">{{ $element->eventElementReservation }}</td>
+                        <td class="tabletextformated">{{ $element->eventElementNote }}</td>
+                        <td>{{ $element->eventElementHotelPrint }}</td>
+                        <td>{{ $element->eventElementPilotPrint }}</td>
+
+
+                        <td>
+                            <div class="btn-group float-end" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-outline-success editbtn">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                <form action="/elementDelete/{{ $element->id }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-outline-danger"><i class="bi bi-trash3"></i></button>
+                                </form>
+                        </td>
+                    </tr>
+
+
+                    @endforeach
+                </table>
+            </div>
+        </div>
     </div>
     <hr>
-</div>
-<div class="container">
-    <div class="row justify-content-between">
-        <div class="col-xs-12 col-md-4">
+
+
+
+    <div class="row">
+
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
                     <h4>Pliki</h4>
                 </div>
+
                 <div class="card-body">
+
                     <form action="{{ route('events.fileStore') }}" method="post" enctype="multipart/form-data">
+
+
+
+
                         @csrf
+
+
+
                         <div class="card-text">
+
                             <input type="hidden" name="eventId" value={{ $event->id }}>
+
+
+
+
+
                             <div class="form-group">
                                 <strong>Nazwa pliku</strong>
                                 {!! Form::text('fileName', null, array('placeholder' => 'Nazwa pliku','class' => 'form-control')) !!}
@@ -981,20 +1101,20 @@
                                 <strong>Dodaj plik:</strong><br>
                                 <input type="file" name="eventFile" class="form-control" accept=".jpg,.jpeg,.bmp,.png,.gif,.doc,.docx,.csv,.rtf,.xlsx,.xls,.txt,.pdf,.zip">
                             </div>
+
                         </div>
                         <button type="submit" class="btn btn-success form-control"> Wyślij </button>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-md-8">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
                     <h4>Pliki</h4>
                 </div>
                 <div class="card-body">
                     <div class="card-text">
-                        <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead>
                                 <th>nazwa</th>
@@ -1030,6 +1150,14 @@
                                         <option value="tak">tak</option>
                                     </select>
                                 </td>
+
+
+                                <!-- <td>{{ $file->FileNote }}</td>
+                                <td>{{ $file->filePilotSet }}</td>
+                                <td>{{ $file->fileHotelSet }}</td> -->
+
+
+
                                 <td>
                                     <div class="btn-group float-end" role="group" aria-label="Basic example">
 
@@ -1048,12 +1176,19 @@
                             </tr>
                             @endforeach
                         </table>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
+
+
+</div>
+</div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ asset('js\summernote-bs4.js') }}"></script>
