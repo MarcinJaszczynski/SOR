@@ -1,25 +1,3 @@
-main {
-    margin-top: 20px;
-}
-nav {
-    margin-bottom: 20px;
-}
-
-.top__bar {
-    margin-bottom: 20px;
-}
-
-.event__search__bar {
-    margin: 20 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.table__text__bold {
-    font-weight: 600;
-}
-
 html,
 body,
 header,
@@ -65,29 +43,7 @@ header,
     }
 }
 
-.landing__top {
-    margin-top: 100px;
-    background-image: url("/img/travelwoman.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position-x: 10%;
-    background-position-y: bottom;
-}
-
-.landing__top__text {
-    padding-left: 20%;
-}
-
-.card__frontpage img{
-    min-height: 450px;;
-}
-
-
-
 /* Footer color for sake of consistency with Navbar */
 .page-footer {
     background-color: #1c2331;
-    color: aliceblue;
-    padding-top: 20px;
-    padding-bottom: 20px;
 }

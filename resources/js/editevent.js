@@ -1,14 +1,7 @@
-// $(document).ready(function() {
-//     $("#editEventNote").summernote();
-//     $('.dropdown-toggle').dropdown();
-// });
-
-
-//   $('#editEventNote').summernote({
-//     placeholder: 'Hello Bootstrap 4',
-//     tabsize: 2,
-//     height: 100
-//   });
+$(document).ready(function() {
+    $("#editEventNote").summernote();
+    $('.dropdown-toggle').dropdown();
+});
 
 
 $(document).ready(function() {

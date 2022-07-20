@@ -30,7 +30,7 @@ use App\Http\Controllers\EventPaymentController;
 */
 
 Route::get('/', function () {
-    return view('layouts.app');
+    return view('layouts.start');
 });
 
 

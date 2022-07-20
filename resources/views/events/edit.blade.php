@@ -474,7 +474,7 @@
 
 <!-- ///////////////////////////// EndEditEventElementModal ////////////////////////////////////////// -->
 
-
+<main>
 <div class="container">
     <div class="justify-content-center">
         @if (count($errors) > 0)
@@ -1055,8 +1055,13 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{ asset('js\summernote-bs4.js') }}"></script>
-<script src="{{ asset('js\editevent.js') }}"></script>
+</main>
+
 
 @endsection
+
+@section('scripts')
+<script src="{{ asset('js\editevent.js') }}"></script>
+@endsection
+
+

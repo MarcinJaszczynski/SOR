@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+<main>
 <div class="container">
     <div class = "row">
     
@@ -39,9 +40,8 @@
               <h5 class="card-title">Najbliższe</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
-          </div>
-         
-        
-    </div>
-</div>
+          </div>  
+        </div>
+      </div>
+</main>
 @endsection
